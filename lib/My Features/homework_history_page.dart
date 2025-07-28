@@ -11,19 +11,19 @@ class HomeworkHistoryPage extends StatefulWidget {
 }
 
 class _HomeworkHistoryPageState extends State<HomeworkHistoryPage> {
-  String? _selectedDate; // Selected date
-  String? _selectedFilter = 'All'; // Selected filter (default All)
+  String? _selectedDate;
+  String? _selectedFilter = 'All';
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(), // Initial date current date
-      firstDate: DateTime(2000), // First selectable date
-      lastDate: DateTime(2101), // Last selectable date
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2101),
     );
     if (picked != null) {
       setState(() {
-        _selectedDate = "${picked.day}/${picked.month}/${picked.year}"; // Date format set kora holo
+        _selectedDate = "${picked.day}/${picked.month}/${picked.year}";
       });
     }
   }
@@ -33,29 +33,26 @@ class _HomeworkHistoryPageState extends State<HomeworkHistoryPage> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back), // Back arrow icon
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // Back button functionality
+            Navigator.pop(context);
           },
         ),
-        title: const Text('homework'), // AppBar title
-        centerTitle: true, // Title center-e rakha holo
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(kToolbarHeight + 10), // TabBar er height adjust kora holo
+          preferredSize: const Size.fromHeight(kToolbarHeight + 10),
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0), // Padding add kora holo
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
             child: Container(
-              height: 45, // Tab bar container height
+              height: 45,
               decoration: BoxDecoration(
-                color: Colors.grey[200], // Background color
-                borderRadius: BorderRadius.circular(25.0), // Rounded corners
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(25.0),
               ),
               child: Row(
                 children: [
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        // Dairy tab e click korle HomeworkPage e navigate kora holo
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(builder: (context) => const HomeworkPage()),
@@ -63,13 +60,12 @@ class _HomeworkHistoryPageState extends State<HomeworkHistoryPage> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25.0), // Rounded corners
-                          // color: Colors.grey[200], // Unselected color
+                          borderRadius: BorderRadius.circular(25.0),
                         ),
-                        alignment: Alignment.center, // Text center-e rakha holo
+                        alignment: Alignment.center,
                         child: const Text(
-                          'Dairy', // Dairy tab text
-                          style: TextStyle(color: Colors.black), // Text color
+                          'Dairy',
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                     ),
@@ -77,13 +73,13 @@ class _HomeworkHistoryPageState extends State<HomeworkHistoryPage> {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25.0), // Rounded corners
-                        color: Colors.blue[700], // Selected color
+                        borderRadius: BorderRadius.circular(25.0),
+                        color: Colors.blue[700],
                       ),
-                      alignment: Alignment.center, // Text center-e rakha holo
+                      alignment: Alignment.center,
                       child: const Text(
-                        'History', // History tab text
-                        style: TextStyle(color: Colors.white), // Text color
+                        'History',
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
@@ -96,57 +92,57 @@ class _HomeworkHistoryPageState extends State<HomeworkHistoryPage> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0), // Padding
+            padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
                 Expanded(
                   child: GestureDetector(
-                    onTap: () => _selectDate(context), // Date picker open korar jonno
+                    onTap: () => _selectDate(context),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8), // Padding
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey), // Border
-                        borderRadius: BorderRadius.circular(8), // Rounded corners
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(8),
                       ),
                       child: Row(
                         children: [
                           Expanded(
                             child: Text(
-                              _selectedDate ?? 'mm/dd/yyyy', // Selected date or placeholder
-                              style: const TextStyle(fontSize: 16), // Text style
+                              _selectedDate ?? 'mm/dd/yyyy',
+                              style: const TextStyle(fontSize: 16),
                             ),
                           ),
-                          const Icon(Icons.calendar_today, size: 20), // Calendar icon
+                          const Icon(Icons.calendar_today, size: 20),
                         ],
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(width: 16), // Space
+                const SizedBox(width: 16),
                 Expanded(
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12), // Padding
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey), // Border
-                      borderRadius: BorderRadius.circular(8), // Rounded corners
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(8),
                     ),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton<String>(
-                        value: _selectedFilter, // Selected filter value
-                        icon: const Icon(Icons.arrow_drop_down), // Dropdown icon
-                        iconSize: 24, // Icon size
-                        elevation: 16, // Elevation
-                        style: const TextStyle(color: Colors.black, fontSize: 16), // Text style
+                        value: _selectedFilter,
+                        icon: const Icon(Icons.arrow_drop_down),
+                        iconSize: 24,
+                        elevation: 16,
+                        style: const TextStyle(color: Colors.black, fontSize: 16),
                         onChanged: (String? newValue) {
                           setState(() {
-                            _selectedFilter = newValue; // New value set kora holo
+                            _selectedFilter = newValue;
                           });
                         },
                         items: <String>['All', 'Submitted', 'Not Submitted', 'Corrected', 'Not Corrected']
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value), // Dropdown item text
+                            child: Text(value),
                           );
                         }).toList(),
                       ),
@@ -158,50 +154,50 @@ class _HomeworkHistoryPageState extends State<HomeworkHistoryPage> {
           ),
           Expanded(
             child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0), // Listview padding
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
               children: const [
                 HomeworkItemWidget(
-                  subject: 'বিষয়: গণিত', // Subject
-                  date: 'তারিখ: ০২-০৩-২০২৩', // Date
-                  lesson: 'আজকের পাঠ: ল.সা.গু ও গ.সা.গু', // Today's lesson
-                  upcomingLesson: 'আগামীকালের প্রস্তুতি: অনুশীলনী ৫.১', // Tomorrow's preparation
-                  homeworkDescription: 'হোমওয়ার্ক: ১০টি সমস্যা সমাধান', // Homework description
-                  isSubmitted: true, // Submitted
-                  isCorrected: false, // Not corrected
-                  feedback: '', // No feedback
-                ),
-                SizedBox(height: 16), // Space between items
-                HomeworkItemWidget(
-                  subject: 'বিষয়: বিজ্ঞান', // Subject
-                  date: 'তারিখ: ০২-০৩-২০২৩', // Date
-                  lesson: 'আজকের পাঠ: জীব কোষ', // Today's lesson
-                  upcomingLesson: 'আগামীকালের প্রস্তুতি: ডায়াগ্রাম আঁকা', // Tomorrow's preparation
-                  homeworkDescription: 'হোমওয়ার্ক: ১০টি সমস্যা সমাধান', // Homework description
-                  isSubmitted: false, // Not submitted
-                  isCorrected: false, // Not corrected
-                  feedback: 'খারাপ', // Feedback
+                  subject: 'বিষয়: গণিত',
+                  date: 'তারিখ: ০২-০৩-২০২৩',
+                  lesson: 'আজকের পাঠ: ল.সা.গু ও গ.সা.গু',
+                  upcomingLesson: 'আগামীকালের প্রস্তুতি: অনুশীলনী ৫.১',
+                  homeworkDescription: 'হোমওয়ার্ক: ১০টি সমস্যা সমাধান',
+                  isSubmitted: true,
+                  isCorrected: false,
+                  feedback: '',
                 ),
                 SizedBox(height: 16),
                 HomeworkItemWidget(
-                  subject: 'বিষয়: বাংলা', // Subject
-                  date: 'তারিখ: ০২-০৩-২০২৩', // Date
-                  lesson: 'আজকের পাঠ: কবিতা', // Today's lesson
-                  upcomingLesson: 'আগামীকালের প্রস্তুতি: ব্যাকরণ', // Tomorrow's preparation
-                  homeworkDescription: 'হোমওয়ার্ক: ৫টি বাক্য রচনা', // Homework description
-                  isSubmitted: true, // Submitted
-                  isCorrected: true, // Corrected
-                  feedback: 'ভাল', // Feedback
+                  subject: 'বিষয়: বিজ্ঞান',
+                  date: 'তারিখ: ০২-০৩-২০২৩',
+                  lesson: 'আজকের পাঠ: জীব কোষ',
+                  upcomingLesson: 'আগামীকালের প্রস্তুতি: ডায়াগ্রাম আঁকা',
+                  homeworkDescription: 'হোমওয়ার্ক: ১০টি সমস্যা সমাধান',
+                  isSubmitted: false,
+                  isCorrected: false,
+                  feedback: 'খারাপ',
                 ),
                 SizedBox(height: 16),
                 HomeworkItemWidget(
-                  subject: 'বিষয়: ইংরেজি', // Subject
-                  date: 'তারিখ: ০২-০৩-২০২৩', // Date
-                  lesson: 'আজকের পাঠ: গ্রামার', // Today's lesson
-                  upcomingLesson: 'আগামীকালের প্রস্তুতি: রাইটিং', // Tomorrow's preparation
-                  homeworkDescription: 'হোমওয়ার্ক: একটি অনুচ্ছেদ লেখা', // Homework description
-                  isSubmitted: true, // Submitted
-                  isCorrected: true, // Corrected
-                  feedback: 'খুব ভাল', // Feedback
+                  subject: 'বিষয়: বাংলা',
+                  date: 'তারিখ: ০২-০৩-২০২৩',
+                  lesson: 'আজকের পাঠ: কবিতা',
+                  upcomingLesson: 'আগামীকালের প্রস্তুতি: ব্যাকরণ',
+                  homeworkDescription: 'হোমওয়ার্ক: ৫টি বাক্য রচনা',
+                  isSubmitted: true,
+                  isCorrected: true,
+                  feedback: 'ভাল',
+                ),
+                SizedBox(height: 16),
+                HomeworkItemWidget(
+                  subject: 'বিষয়: ইংরেজি',
+                  date: 'তারিখ: ০২-০৩-২০২৩',
+                  lesson: 'আজকের পাঠ: গ্রামার',
+                  upcomingLesson: 'আগামীকালের প্রস্তুতি: রাইটিং',
+                  homeworkDescription: 'হোমওয়ার্ক: একটি অনুচ্ছেদ লেখা',
+                  isSubmitted: true,
+                  isCorrected: true,
+                  feedback: 'খুব ভাল',
                 ),
               ],
             ),
@@ -209,26 +205,26 @@ class _HomeworkHistoryPageState extends State<HomeworkHistoryPage> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed, // Fixed type for items
-        selectedItemColor: Colors.blue[700], // Selected item color
-        unselectedItemColor: Colors.grey, // Unselected item color
-        backgroundColor: Colors.white, // Bottom navigation bar background white
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.blue[700],
+        unselectedItemColor: Colors.grey,
+        backgroundColor: Colors.white,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home), // Home icon
-            label: 'HOME', // Home label
+            icon: Icon(Icons.home),
+            label: 'HOME',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.inbox), // Inbox icon
-            label: 'INBOX', // Inbox label
+            icon: Icon(Icons.inbox),
+            label: 'INBOX',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.swap_horiz), // Transaction icon
-            label: 'TRANSACTION', // Transaction label
+            icon: Icon(Icons.swap_horiz),
+            label: 'TRANSACTION',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person), // Profile icon
-            label: 'PROFILE', // Profile label
+            icon: Icon(Icons.person),
+            label: 'PROFILE',
           ),
         ],
       ),
